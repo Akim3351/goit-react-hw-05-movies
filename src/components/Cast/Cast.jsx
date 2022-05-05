@@ -31,6 +31,7 @@ export default function Cast() {
               {item.profile_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
+                  alt={`${item.character} - ${item.name}`}
                   className={css.cast__photo}
                 />
               ) : (
