@@ -1,0 +1,82 @@
+.movie__wrapper {
+  padding: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.movie__main {
+  display: flex;
+  background-color: rgba(212, 212, 212, 0.5);
+}
+
+.movie__poster {
+  max-width: 250px;
+}
+
+.descr__wrapper {
+  max-width: 550px;
+  padding: 10px;
+}
+
+.descr__subtitle {
+  font-weight: 600;
+}
+
+.genres__list {
+  list-style: none;
+  padding: 0px 10px;
+}
+
+.descr__overwiew {
+  display: block;
+  text-align: justify;
+}
+
+.backbutton {
+  padding: 0px 5px;
+  display: flex;
+  padding: 0px;
+  width: 100px;
+  height: 20px;
+  margin: 10px 0px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  background-color: darkgray;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+
+.backbutton svg {
+  height: 20px;
+  font-weight: 900;
+  margin-right: 15px;
+}
+
+.additional__subheader {
+  margin: 0px;
+  padding: 20px 15px;
+  background-color: rgba(212, 212, 212, 0.5);
+}
+
+.movie__navigation {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(212, 212, 212, 0.5);
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 14px;
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 18px;
+}
+
+.activeLink {
+  composes: link;
+  color: #7a0085;
+}
