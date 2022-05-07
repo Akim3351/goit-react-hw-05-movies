@@ -9,7 +9,7 @@ export default function Homepage() {
     return localStorage.getItem('fetchDate') ?? Date.now();
   });
   const [trendingMovies, setTrendingMovies] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('trendMovies')) ?? [];
+    return JSON.parse(window.localStorage.getItem('trendMovies')) ?? '';
   });
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Homepage() {
       const deltaTime = Date.now() - lastFetchTrendMovsDate;
       const minimalInterval = 600000;
 
-      if (deltaTime < minimalInterval) {
+      if (deltaTime < minimalInterval && trendingMovies !== '') {
         return;
       }
 
