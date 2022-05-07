@@ -16,7 +16,6 @@ export default function Homepage() {
     async function getTrendingMovies() {
       const deltaTime = Date.now() - lastFetchTrendMovsDate;
       const minimalInterval = 600000;
-
       if (deltaTime < minimalInterval && trendingMovies !== '') {
         return;
       }
@@ -32,7 +31,7 @@ export default function Homepage() {
       }
     }
     getTrendingMovies();
-  }, [lastFetchTrendMovsDate]);
+  }, [lastFetchTrendMovsDate, trendingMovies]);
   return (
     <div>
       <ul className={css.homepage__list}>
