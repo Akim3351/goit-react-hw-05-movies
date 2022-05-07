@@ -3,25 +3,23 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from 'components/Layout/Layout';
 import AppBar from './components/AppBar/AppBar';
 const Homepage = lazy(() =>
-  import('./pages/HomePage/HomePage.jsx' /* webpackChunkName: "home-page" */)
+  import('./pages/HomePage/HomePage' /* webpackChunkName: "home-page" */)
 );
 const MoviesPage = lazy(() =>
-  import(
-    './pages/MoviesPage/MoviesPage.jsx' /* webpackChunkName: "movies-page" */
-  )
+  import('./pages/MoviesPage/MoviesPage' /* webpackChunkName: "movies-page" */)
 );
 
 const MovieDetailsPage = lazy(() =>
   import(
-    './pages/MovieDetailsPage/MovieDetailsPage.jsx' /* webpackChunkName: "movie-details-page" */
+    './pages/MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: "movie-details-page" */
   )
 );
 
 const Cast = lazy(() =>
-  import('./pages/Cast/Cast.jsx' /* webpackChunkName: "cast" */)
+  import('./pages/Cast/Cast' /* webpackChunkName: "cast" */)
 );
 const Reviews = lazy(() =>
-  import('./pages/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */)
+  import('./pages/Reviews/Reviews' /* webpackChunkName: "reviews" */)
 );
 
 export const App = () => {
