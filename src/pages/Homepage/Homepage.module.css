@@ -14,6 +14,8 @@
   text-decoration: none;
 }
 
-.homepage__link:active {
+.homepage__link:hover {
   cursor: pointer;
+  font-weight: 600;
+  color: #7a0085;
 }

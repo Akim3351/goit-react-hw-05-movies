@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import css from './MoviesPage.module.css';
 
 import { searchMovies } from 'services/API/SearchMovies';
 import Searchbar from 'components/Searchbar/Searchbar';
 
 export default function MoviesPage() {
+  const location = useLocation();
   const [moviesQuery, setMoviesQuery] = useState('');
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(() => {
+    return JSON.parse(window.localStorage.getItem('savedMovies')) ?? [];
+  });
 
   useEffect(() => {
     if (!moviesQuery) {
@@ -18,6 +21,7 @@ export default function MoviesPage() {
       try {
         const movs = await searchMovies(moviesQuery);
         setMovies([...movs]);
+        localStorage.setItem('savedMovies', JSON.stringify(movs));
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +43,15 @@ export default function MoviesPage() {
               const { id, title } = movie;
               return (
                 <li key={id} className={css.moviespage__item}>
-                  <NavLink to={`${id}`} className={css.moviespage__link}>
+                  <NavLink
+                    to={`${id}`}
+                    state={{
+                      from: location,
+                      label: 'back to search results',
+                      originPath: 'movies',
+                    }}
+                    className={css.moviespage__link}
+                  >
                     {title}
                   </NavLink>
                 </li>

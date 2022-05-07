@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, NavLink, useParams, Outlet } from 'react-router-dom';
+import {
+  useLocation,
+  useParams,
+  Outlet,
+  NavLink,
+  Link,
+} from 'react-router-dom';
 import GetMovieId from 'services/API/GetMovieId';
 import css from './MovieDetailsPage.module.css';
 import { BiArrowBack } from 'react-icons/bi';
 
 export default function MovieDetailsPage() {
-  const navigate = useNavigate();
+  const location = useLocation();
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
 
@@ -23,9 +29,8 @@ export default function MovieDetailsPage() {
   const { title, poster_path, popularity, overview, genres, backdrop_path } =
     movie;
 
-  const onBackClick = () => {
-    navigate(-1);
-  };
+  const originPath = location?.state?.originPath ?? '/';
+  const label = location?.state?.label ?? 'back';
 
   if (!movie) {
     return;
@@ -38,10 +43,10 @@ export default function MovieDetailsPage() {
         background: `url(https://image.tmdb.org/t/p/original/${backdrop_path}`,
       }}
     >
-      <button className={css.backbutton} type="button" onClick={onBackClick}>
+      <Link to={originPath} className={css.backlink}>
         <BiArrowBack />
-        GO BACK
-      </button>
+        {label ?? 'go back'}
+      </Link>
 
       <div className={css.movie__main}>
         <img
@@ -71,6 +76,7 @@ export default function MovieDetailsPage() {
         <nav className={css.movie__navigation}>
           <NavLink
             to={'cast'}
+            state={{ originPath: originPath, label: label }}
             className={({ isActive }) =>
               isActive ? `${css.activeLink}` : `${css.link}`
             }
@@ -80,6 +86,7 @@ export default function MovieDetailsPage() {
 
           <NavLink
             to={'reviews'}
+            state={{ originPath: originPath, label: label }}
             className={({ isActive }) =>
               isActive ? `${css.activeLink}` : `${css.link}`
             }

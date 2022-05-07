@@ -18,6 +18,8 @@
   text-decoration: none;
 }
 
-.moviespage__link:active {
+.moviespage__link:hover {
   cursor: pointer;
+  font-weight: 600;
+  color: #7a0085;
 }

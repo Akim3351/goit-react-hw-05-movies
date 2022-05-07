@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from 'components/Layout/Layout';
 import AppBar from './components/AppBar/AppBar';
 const Homepage = lazy(() =>
-  import('./pages/Homepage/Homepage.jsx' /* webpackChunkName: "home-page" */)
+  import('./pages/HomePage/HomePage.jsx' /* webpackChunkName: "home-page" */)
 );
 const MoviesPage = lazy(() =>
   import(
@@ -18,10 +18,10 @@ const MovieDetailsPage = lazy(() =>
 );
 
 const Cast = lazy(() =>
-  import('./components/Cast/Cast.jsx' /* webpackChunkName: "cast" */)
+  import('./pages/Cast/Cast.jsx' /* webpackChunkName: "cast" */)
 );
 const Reviews = lazy(() =>
-  import('./components/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */)
+  import('./pages/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */)
 );
 
 export const App = () => {
@@ -38,6 +38,7 @@ export const App = () => {
               <Route path="reviews" exact element={<Reviews />} />
             </Route>
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />{' '}
         </Routes>
       </Suspense>
     </>
