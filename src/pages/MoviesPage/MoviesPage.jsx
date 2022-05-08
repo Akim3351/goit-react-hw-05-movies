@@ -8,17 +8,14 @@ import Searchbar from 'components/Searchbar/Searchbar';
 export default function MoviesPage() {
   const location = useLocation();
   const [moviesQuery, setMoviesQuery] = useState(() => {
-    return window.localStorage.getItem('moviesQuery') ?? [];
+    return window.localStorage.getItem('moviesQuery') ?? '';
   });
   const [urlQuery, setUrlQuery] = useSearchParams();
   const [movies, setMovies] = useState([]);
-  // const [movies, setMovies] = useState(() => {
-  //   return JSON.parse(window.localStorage.getItem('savedMovies')) ?? [];
-  // });
   const currentSearchParam = urlQuery.get('query');
 
   useEffect(() => {
-    if (!moviesQuery) {
+    if (moviesQuery === '') {
       return;
     }
 
