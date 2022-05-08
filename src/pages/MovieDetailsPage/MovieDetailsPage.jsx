@@ -1,14 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import {
   useLocation,
   useParams,
-  Outlet,
+  Route,
   NavLink,
   Link,
+  Routes,
 } from 'react-router-dom';
 import GetMovieId from 'services/API/GetMovieId';
 import css from './MovieDetailsPage.module.css';
 import { BiArrowBack } from 'react-icons/bi';
+import { ThreeDots } from 'react-loader-spinner';
+
+const Cast = lazy(() =>
+  import('../../pages/Cast/Cast' /* webpackChunkName: "cast" */)
+);
+const Reviews = lazy(() =>
+  import('../../pages/Reviews/Reviews' /* webpackChunkName: "reviews" */)
+);
 
 export default function MovieDetailsPage() {
   const location = useLocation();
@@ -95,8 +104,14 @@ export default function MovieDetailsPage() {
           </NavLink>
         </nav>
       </div>
+      <Suspense fallback={<ThreeDots color="black" />}>
+        <Routes>
+          <Route path="/cast" exact element={<Cast />} />
+          <Route path="/reviews" exact element={<Reviews />} />
+        </Routes>
+      </Suspense>
 
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 }

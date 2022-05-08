@@ -48,7 +48,7 @@ export default function MoviesPage() {
                     state={{
                       from: location,
                       label: 'back to search results',
-                      originPath: 'movies',
+                      originPath: '/movies',
                     }}
                     className={css.moviespage__link}
                   >

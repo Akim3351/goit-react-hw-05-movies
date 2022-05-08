@@ -19,8 +19,13 @@ export default function Reviews() {
     }
   }, [movieId]);
 
-  if (reviews === '') {
-    return;
+  if (reviews.length === 0) {
+    return (
+      <p className={css.noreviews}>
+        {' '}
+        We don`t have any reviews for this movie{' '}
+      </p>
+    );
   }
 
   return (
