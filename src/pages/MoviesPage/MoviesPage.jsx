@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import css from './MoviesPage.module.css';
 
 import { searchMovies } from 'services/API/SearchMovies';
@@ -7,28 +7,41 @@ import Searchbar from 'components/Searchbar/Searchbar';
 
 export default function MoviesPage() {
   const location = useLocation();
-  const [moviesQuery, setMoviesQuery] = useState('');
-  const [movies, setMovies] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('savedMovies')) ?? [];
+  const [moviesQuery, setMoviesQuery] = useState(() => {
+    return window.localStorage.getItem('moviesQuery') ?? [];
   });
+  const [urlQuery, setUrlQuery] = useSearchParams();
+  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState(() => {
+  //   return JSON.parse(window.localStorage.getItem('savedMovies')) ?? [];
+  // });
+  const currentSearchParam = urlQuery.get('query');
 
   useEffect(() => {
     if (!moviesQuery) {
       return;
     }
 
+    setUrlQuery({ query: moviesQuery });
+
     async function getMovies() {
       try {
         const movs = await searchMovies(moviesQuery);
         setMovies([...movs]);
-        localStorage.setItem('savedMovies', JSON.stringify(movs));
+        localStorage.setItem('moviesQuery', moviesQuery);
       } catch (error) {
         console.log(error);
       }
     }
 
     getMovies();
-  }, [moviesQuery]);
+  }, [moviesQuery, setUrlQuery]);
+
+  useEffect(() => {
+    if (currentSearchParam) {
+      setMoviesQuery(currentSearchParam);
+    }
+  }, [currentSearchParam]);
 
   const onFormSubmit = value => {
     setMoviesQuery(value);
