@@ -4,7 +4,7 @@ import Layout from 'components/Layout/Layout';
 import AppBar from './components/AppBar/AppBar';
 import { ThreeDots } from 'react-loader-spinner';
 
-const Homepage = lazy(() =>
+const HomePage = lazy(() =>
   import('./pages/HomePage/HomePage' /* webpackChunkName: "home-page" */)
 );
 const MoviesPage = lazy(() =>
@@ -17,13 +17,6 @@ const MovieDetailsPage = lazy(() =>
   )
 );
 
-// const Cast = lazy(() =>
-//   import('./pages/Cast/Cast' /* webpackChunkName: "cast" */)
-// );
-// const Reviews = lazy(() =>
-//   import('./pages/Reviews/Reviews' /* webpackChunkName: "reviews" */)
-// );
-
 export const App = () => {
   return (
     <>
@@ -31,16 +24,13 @@ export const App = () => {
       <Suspense fallback={<ThreeDots color="black" />}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
+            <Route index element={<HomePage />} />
             <Route path="movies" exact element={<MoviesPage />} />
             <Route
               path="movies/:movieId/*"
               exact
               element={<MovieDetailsPage />}
-            >
-              {/* <Route path="cast" exact element={<Cast />} />
-              <Route path="reviews" exact element={<Reviews />} /> */}
-            </Route>
+            />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />{' '}
         </Routes>
